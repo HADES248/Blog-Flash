@@ -4,27 +4,52 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Blog Flash</title>
+  <!-- We Output Dynamic Code this way -->
+  <title>Blog Flash | <%= title %>
+  </title>
 </head>
 
 <body>
-  <nav>
-    <div class="site-title">
-      <a href="/">
-        <h1>Blog Flash</h1>
-      </a>
-      <p>Your Thoughts</p>
-    </div>
-    <ul>
-      <li><a href="/">Blogs</a></li>
-      <li><a href="/about">About</a></li>
-      <li><a href="/blogs/create">New Thought</a></li>
-    </ul>
-  </nav>
 
-  <div class="blogs content">
-    <h2>All blogs</h2>
-  </div>
+  <!-- We can write dynamic code this way -->
+  <% const name='Axel Blaze' %>
+
+    <nav>
+      <div class="site-title">
+        <p>
+
+        </p>
+        <a href="/">
+          <h1>Blog Flash</h1>
+        </a>
+        <p>Your Thoughts</p>
+      </div>
+      <ul>
+        <li><a href="/">Blogs</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/blogs/create">New Thought</a></li>
+      </ul>
+    </nav>
+
+    <div class="blogs content">
+      <h2>All blogs</h2>
+
+
+      <!-- Looping through an array of data using view -->
+      
+      <%if (blogs.length> 0) {%>
+        <%blogs.forEach((blog)=> {%>
+          <h3 class="title">
+            <%=blog.title%>
+          </h3>
+          <p class="snippet">
+            <%=blog.snippet%>
+          </p>
+          <%})%>
+            <%} else { %>
+              <p>There are no blogs to display</p>
+              <%}%>
+    </div>
 
 </body>
 

@@ -28,8 +28,20 @@ app.get('/', (req, res) => {
     res.sendFile('./views/index.html', { root: __dirname });
   */
 
+  const blogs = [
+    { title: 'Axel has Fire Element', snippet: 'Fire Tornado' },
+    { title: 'Shawn has Ice Element', snippet: 'Eternal Blizzard' },
+    { title: 'Jordan has Nature Element', snippet: 'Astro Break' },
+  ]
+
   // To send a view as a response back to the browser we can use res.render().
-  res.render('index');
+  // To render dynamic data in index html we can send an object as a second params.
+  res.render('index', { title: 'Home', blogs });
+  // This object is passed to index.ejs & can be accessed there.
+
+  // How Does This work? 
+  // Ejs file is passed into ejs view engine, that engine checks for the dynamic data, figures out the html for that part then sends that complete html page(with dynamic data) back to the browser.(This process is called server-side rendering).
+
 
 
 })
@@ -41,7 +53,7 @@ app.get('/about', (req, res) => {
     One Problem, sendFile looks for an absolute path as a parameter from the root file computer, to define a relative path we have to specify where it is relative from using a second params
     res.sendFile('./views/about.html', { root: __dirname });
   */
-  res.render('about');
+  res.render('about', { title: 'About' });
 })
 
 
@@ -53,7 +65,7 @@ app.get('./about-us', (req, res) => {
 
 // Creating a Blog
 app.get('/blogs/create', (req, res) => {
-  res.render('create');
+  res.render('create', { title: 'New Blog' });
 })
 
 
@@ -65,7 +77,7 @@ app.use((req, res) => {
   res.status(404).sendFile('./views/404.html', { root: __dirname });
   // Also need to set status here as express does not realize that anything is wrong here.
   */
-  res.status(404).render('404');
+  res.status(404).render('404', { title: '404' });
 })
 
 
