@@ -1,55 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- We Output Dynamic Code this way -->
-  <title>Blog Flash | <%= title %>
-  </title>
-</head>
-
+  <!-- Head -->
+<%- include("./partials/head.ejs") %>
 <body>
 
   <!-- We can write dynamic code this way -->
   <% const name='Axel Blaze' %>
 
-    <nav>
-      <div class="site-title">
-        <p>
+    <!-- To use partials we use include() function with relative path as params and also use " - " sign, not = as = gives a string value & - gives raw html -->
 
-        </p>
-        <a href="/">
-          <h1>Blog Flash</h1>
-        </a>
-        <p>Your Thoughts</p>
+    <!-- Navbar -->
+    <%- include("./partials/nav.ejs") %>
+
+      <div class="blogs content">
+        <h2>All blogs</h2>
+
+
+        <!-- Looping through an array of data using view -->
+
+        <%if (blogs.length> 0) {%>
+          <%blogs.forEach((blog)=> {%>
+            <h3 class="title">
+              <%=blog.title%>
+            </h3>
+            <p class="snippet">
+              <%=blog.snippet%>
+            </p>
+            <%})%>
+              <%} else { %>
+                <p>There are no blogs to display</p>
+                <%}%>
       </div>
-      <ul>
-        <li><a href="/">Blogs</a></li>
-        <li><a href="/about">About</a></li>
-        <li><a href="/blogs/create">New Thought</a></li>
-      </ul>
-    </nav>
 
-    <div class="blogs content">
-      <h2>All blogs</h2>
-
-
-      <!-- Looping through an array of data using view -->
-      
-      <%if (blogs.length> 0) {%>
-        <%blogs.forEach((blog)=> {%>
-          <h3 class="title">
-            <%=blog.title%>
-          </h3>
-          <p class="snippet">
-            <%=blog.snippet%>
-          </p>
-          <%})%>
-            <%} else { %>
-              <p>There are no blogs to display</p>
-              <%}%>
-    </div>
+      <!-- footer -->
+      <%- include("./partials/footer.ejs") %>
 
 </body>
 

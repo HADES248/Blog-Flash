@@ -1,27 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Blog Flash | <%= title %>
-  </title>
-</head>
+<%- include("./partials/head.ejs") %>
 
 <body>
-  <nav>
-    <div class="site-title">
-      <a href="/">
-        <h1>Blog Flash</h1>
-      </a>
-      <p>Your Thoughts</p>
-    </div>
-    <ul>
-      <li><a href="/">Blogs</a></li>
-      <li><a href="/about">About</a></li>
-      <li><a href="/blogs/create">New Thought</a></li>
-    </ul>
-  </nav>
+  <%- include("./partials/nav.ejs") %>
 
   <div class="about content">
     <h2>About Us</h2>
@@ -32,6 +15,8 @@
     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores eius ipsam laudantium dolorem sequi
       perspiciatis odio earum incidunt amet ex optio nisi fugiat, maiores distinctio facere dicta modi beatae vero!</p>
   </div>
+
+  <%- include("./partials/footer.ejs") %>
 
 </body>
 

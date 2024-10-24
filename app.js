@@ -35,14 +35,12 @@ app.get('/', (req, res) => {
   ]
 
   // To send a view as a response back to the browser we can use res.render().
-  // To render dynamic data in index html we can send an object as a second params.
+  // To render dynamic data in view we can send an object as a second params.
   res.render('index', { title: 'Home', blogs });
   // This object is passed to index.ejs & can be accessed there.
 
   // How Does This work? 
   // Ejs file is passed into ejs view engine, that engine checks for the dynamic data, figures out the html for that part then sends that complete html page(with dynamic data) back to the browser.(This process is called server-side rendering).
-
-
 
 })
 
