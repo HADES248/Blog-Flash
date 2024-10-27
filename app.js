@@ -8,6 +8,24 @@ const app = express();
 app.listen(3000);
 
 
+// Middleware - it is the code that runs between the request made by the browser and the response sent by the server. 
+/*
+Some Uses - logger middleware:- to run the for every request and log the request details
+Authentication checks for protected routes
+Middleware to parse JSON data from requests
+Return 404 pages (like the bottom of this code)
+*/
+//All the code runs until the response(res) is sent back by the server, Example:-
+app.use((req,res, next) => {
+  console.log("New Request Made");
+  console.log("host:", req.hostname);
+  console.log("path:", req.path);
+  console.log("method:", req.method);
+  // If we don't want to send a response back to the browser we will need to use the next() function to move to the next line of code as Express does not move on to the next linn of code by itself.
+  next();
+})
+
+
 // View Engines - they help us inject dynamic data (like blogs - every one has different blogs) in our html page.
 // Express apps can use view engines very easily.
 // We will use EJS for this project.
@@ -41,8 +59,13 @@ app.get('/', (req, res) => {
 
   // How Does This work? 
   // Ejs file is passed into ejs view engine, that engine checks for the dynamic data, figures out the html for that part then sends that complete html page(with dynamic data) back to the browser.(This process is called server-side rendering).
-
 })
+
+app.use((req,res,next) => {
+  console.log("In the Next Middleware");
+  next();
+})
+
 
 //ABOUT PAGE
 app.get('/about', (req, res) => {
