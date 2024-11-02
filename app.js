@@ -9,6 +9,7 @@ const app = express();
 app.listen(3000);
 
 // Using 3rd party middleware (morgan in this case), directly use morgan with options as params(dev,tiny)
+// morgan is used to log several values in the console. 
 app.use(morgan('dev'));
 
 // middleware & static files (Static files- images,css) Express also has middleware functions which allows the browser to access static files .
