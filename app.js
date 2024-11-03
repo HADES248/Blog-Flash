@@ -1,15 +1,27 @@
 // Creating an express app
 const express = require('express');
-const morgan = require('morgan')
+const morgan = require('morgan');
+const mongoose = require('mongoose');
+
+
 const app = express();
 // First we get the function back from require then we invoke that function to create an instance of express app.
 
+// Connection String to Mongodb Atlas (MongDB API)
+const MongoURI = 'mongodb+srv://Shiva:ShivanshSingh@mongodb.3e7nf.mongodb.net/Node?retryWrites=true&w=majority&appName=MongoDb'
 
-//listening for requests
-app.listen(3000);
+// Mongoose is a 3rd party ODM (Object Document Mapping) Library, It wraps the MongoDb API & provides us an easier way to connect & communicate with the database. 
+mongoose.connect(MongoURI).then((result) => {
+  //listening for requests after the connected to db is established, not before as if there is Db content on the home page it wont be loaded.
+  app.listen(3000);
+  console.log('Connected to Db');
+}).catch((err) => {
+  console.log(err);
+});
+
 
 // Using 3rd party middleware (morgan in this case), directly use morgan with options as params(dev,tiny)
-// morgan is used to log several values in the console. 
+// morgan is used to log several values (req sent by the browser, etc) in the console.
 app.use(morgan('dev'));
 
 // middleware & static files (Static files- images,css) Express also has middleware functions which allows the browser to access static files .
