@@ -2,6 +2,7 @@
 const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
+const Blog = require('./models/blog');
 
 
 const app = express();
@@ -19,13 +20,42 @@ mongoose.connect(MongoURI).then((result) => {
   console.log(err);
 });
 
-
 // Using 3rd party middleware (morgan in this case), directly use morgan with options as params(dev,tiny)
 // morgan is used to log several values (req sent by the browser, etc) in the console.
 app.use(morgan('dev'));
 
 // middleware & static files (Static files- images,css) Express also has middleware functions which allows the browser to access static files .
 app.use(express.static("public"));
+
+// mongoose & mongo sandbox routes(testing routes)
+//1. Adding a new Blog
+app.get('/add-blog', (req, res) => {
+  // Using blog model to create a new instance of the blog(following the schema).
+  const blog = new Blog({
+    title: 'FFI Tournament (Update)',
+    snippet: 'Football Frontier International Matche Fixutres',
+    body: 'Matches are Gonna start on 19th Nov, Tickets for the family members will be released soon.'
+  })
+
+  // When we use the instance of the blog model(blog constant) it gives us various methods that we can use.
+  blog.save().then((result) => {
+    res.send(result)
+  }).catch(err => console.log(err));
+})
+
+//2. retrive all blogs from the collection.
+app.get('/all-blogs', (req, res) => {
+  Blog.find().then((result) => {
+    res.send(result)
+  }).catch(err => console.log(err));
+})
+
+//3. retrive single blog from the collection.
+app.get('/single-blog', (req, res) => {
+  Blog.findById('6728915f5e87f8e44ffce0e1').then((result) => {
+    res.send(result)
+  }).catch(err => console.log(err));
+})
 
 /*
  Middleware - it is the code that runs between the request made by the browser and the response sent by the server. 
@@ -47,8 +77,6 @@ app.use((req,res, next) => {
 
 */
 
-
-
 // View Engines - they help us inject dynamic data (like blogs - every one has different blogs) in our html page.
 // Express apps can use view engines very easily.
 // We will use EJS for this project.
@@ -56,7 +84,6 @@ app.use((req,res, next) => {
 app.set('view engine', 'ejs');
 // we can also store our views in different folder but we would need to specify the location of that folder.
 // app.set('view', 'myViews');
-
 
 
 //HOME PAGE

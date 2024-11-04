@@ -1,9 +1,10 @@
 // Schemas define the document, it's properties & property types.
 const mongoose = require('mongoose');
+
 // Requiring Schema attribute from mongoose
 const Schema = mongoose.Schema;
 
-// Creating a schmea for the blogs.
+// Creating a Schmea for the blogs.
 const blogSchema = new Schema({
   title: {
     type: String,
