@@ -32,9 +32,9 @@ app.use(express.static("public"));
 app.get('/add-blog', (req, res) => {
   // Using blog model to create a new instance of the blog(following the schema).
   const blog = new Blog({
-    title: 'FFI Tournament (Update)',
-    snippet: 'Football Frontier International Matche Fixutres',
-    body: 'Matches are Gonna start on 19th Nov, Tickets for the family members will be released soon.'
+    title: 'FFI Tournament (Update 2)',
+    snippet: 'Football Frontier International Match Rescheduled',
+    body: 'The Match for 20th Nov has been rescheduled for 21st Nov.'
   })
 
   // When we use the instance of the blog model(blog constant) it gives us various methods that we can use.
