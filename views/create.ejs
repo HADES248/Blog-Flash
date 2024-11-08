@@ -3,24 +3,26 @@
 
 <%- include("./partials/head.ejs") %>
 
-<body>
+  <body>
 
-  <%- include("./partials/nav.ejs") %>
+    <%- include("./partials/nav.ejs") %>
 
-  <div class="create-blog content">
-    <form>
-      <label for="title">Blog Title:</label>
-      <input type="text" id="title" required>
-      <label for="">Blog snippet:</label>
-      <input type="text" id="snippet" required>
-      <label for="body">Blog body:</label>
-      <textarea id="body" required></textarea>
-      <button>Submit</button>
-    </form>
-  </div>
+      <div class="create-blog content">
 
-  <%- include("./partials/footer.ejs") %>
+        <!-- Using action attribute to determine where to send this request to & method attribute to determine the type of request -->
+        <form action="/blogs" method="POST">
+          <label for="title">Blog Title:</label>
+          <input type="text" id="title" required name="title">
+          <label for="">Blog snippet:</label>
+          <input type="text" id="snippet" required name="snippet">
+          <label for="body">Blog body:</label>
+          <textarea id="body" required name="body"></textarea>
+          <button>Submit</button>
+        </form>
+      </div>
 
-</body>
+      <%- include("./partials/footer.ejs") %>
+
+  </body>
 
 </html>

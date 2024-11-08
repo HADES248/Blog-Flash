@@ -26,7 +26,13 @@ app.use(morgan('dev'));
 
 // middleware & static files (Static files- images,css) Express also has middleware functions which allows the browser to access static files .
 app.use(express.static("public"));
+// Using express middleware .urlencoded() to parse the data of the req sent into a workable format.
+// .urlencoded() takes all the data from the request sent & passes that data in the request object.
+// extneded: true means that you can send more complex data in the request body.
+app.use(express.urlencoded({ extended: true }))
 
+
+/*
 // mongoose & mongo sandbox routes(testing routes)
 //1. Adding a new Blog
 app.get('/add-blog', (req, res) => {
@@ -56,6 +62,9 @@ app.get('/single-blog', (req, res) => {
     res.send(result)
   }).catch(err => console.log(err));
 })
+*/
+
+
 
 /*
  Middleware - it is the code that runs between the request made by the browser and the response sent by the server. 
@@ -88,6 +97,7 @@ app.set('view engine', 'ejs');
 
 //HOME PAGE
 // To respond we use app.(type of request get,post)
+// Routes for different types of request can be same (/) can be for both app.get & app.post
 // Takes 2 arguements, path and an call back function with req,res
 app.get('/', (req, res) => {
   res.redirect('/blogs');
@@ -134,7 +144,7 @@ app.get('./about-us', (req, res) => {
 
 
 // Blog routes - All the routes related to Blogs
-// Outputting the document data into the view.
+4// Outputting the document data into the view.
 app.get('/blogs', (req, res) => {
   // Fetching all blogs and rendering them in index.ejs
   // using .sort() method with the field createdAt(added automatically by mongoose) & -1 is newest to oldest sorting order.
@@ -143,6 +153,17 @@ app.get('/blogs', (req, res) => {
   }).catch(err => console.log(err));
 })
 
+// Adding a blog
+app.post('/blogs', (req, res) => {
+
+  // We can directly send the req.body since req.body & blog schema is same.
+  const blog = new Blog(req.body);
+
+  blog.save().then((result) => {
+    // After saving the blog, redirected to home page to see the new blog.
+    res.redirect('/blogs');
+  }).catch(err => console.log(err));
+})
 
 
 // Creating a Blog
