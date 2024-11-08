@@ -71,7 +71,7 @@ app.use((req,res, next) => {
  console.log("host:", req.hostname);
  console.log("path:", req.path);
  console.log("method:", req.method);
- // If we don't want to send a response back to the browser we will need to use the next() function to move to the next line of code as Express does not move on to the next linn of code by itself.
+ // If we don't want to send a response back to the browser we will need to use the next() function to move to the next line of code as Express does not move on to the next line of code by itself.
  next();
 })
 
@@ -90,26 +90,30 @@ app.set('view engine', 'ejs');
 // To respond we use app.(type of request get,post)
 // Takes 2 arguements, path and an call back function with req,res
 app.get('/', (req, res) => {
+  res.redirect('/blogs');
+
   /*
     Automatically sets the content-type so no setheader required & the statusCode.
     res.send('<h1>Welcome to the Football Frontier International</h1>');
     res.sendFile('./views/index.html', { root: __dirname });
-  */
 
-  const blogs = [
+    Sandbox array for index.ejs
+    const blogs = [
     { title: 'Axel has Fire Element', snippet: 'Fire Tornado' },
     { title: 'Shawn has Ice Element', snippet: 'Eternal Blizzard' },
     { title: 'Jordan has Nature Element', snippet: 'Astro Break' },
   ]
+  
 
-  // To send a view as a response back to the browser we can use res.render().
-  // To render dynamic data in view we can send an object as a second params.
+  To send a view as a response back to the browser we can use res.render().
+  To render dynamic data in view we can send an object as a second params.
   res.render('index', { title: 'Home', blogs });
-  // This object is passed to index.ejs & can be accessed there.
+  This object is passed to index.ejs & can be accessed there.
 
-  // How Does This work? 
-  // Ejs file is passed into ejs view engine, that engine checks for the dynamic data, figures out the html for that part then sends that complete html page(with dynamic data) back to the browser.(This process is called server-side rendering).
-})
+  How Does This work? 
+  Ejs file is passed into ejs view engine, that engine checks for the dynamic data, figures out the html for that part then sends that complete html page(with dynamic data) back to the browser.(This process is called server-side rendering).
+  */
+});
 
 
 //ABOUT PAGE
@@ -127,6 +131,18 @@ app.get('/about', (req, res) => {
 app.get('./about-us', (req, res) => {
   res.redirect('/about');
 })
+
+
+// Blog routes - All the routes related to Blogs
+// Outputting the document data into the view.
+app.get('/blogs', (req, res) => {
+  // Fetching all blogs and rendering them in index.ejs
+  // using .sort() method with the field createdAt(added automatically by mongoose) & -1 is newest to oldest sorting order.
+  Blog.find().sort({ createdAt: -1 }).then((result) => {
+    res.render('index', { title: 'All Blogs', blogs: result })
+  }).catch(err => console.log(err));
+})
+
 
 
 // Creating a Blog
