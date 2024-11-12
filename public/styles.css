@@ -88,6 +88,24 @@ h3 {
 }
 
 /* details styles */
+.details {
+  position: relative;
+}
+
+.delete {
+  position: absolute;
+  top: 0;
+  right: 0;
+  border-radius: 6px;
+  background-color: cyan;
+  padding: 8px;
+}
+
+.delete:hover {
+  cursor: pointer;
+}
+
+
 
 /* create styles */
 .create-blog form {

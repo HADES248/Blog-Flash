@@ -182,6 +182,16 @@ app.get('/blogs/:id', (req, res) => {
   }).catch(err => console.log(err));
 })
 
+// Deleting a blog
+app.delete('/blogs/:id', (req, res) => {
+  const id = req.params.id;
+  Blog.findByIdAndDelete(id).then((result) => {
+    // When sending a Ajax request we cannot directly use a redirect as a res in node. So, we can send a res.json back to browser with a redirect property, then that property is sent to browser & then we will use Front-End to redirect to the next web page.
+    res.json({ redirect: '/blogs' })
+  }).catch(err => console.log(err));
+})
+
+
 // 404 Page
 // In cases of 404 page we use .use() in express, this function fires for every request coming but only if the request reaches this point in the code (meaning if request finds the correct match it will send back the res and the req will end otherwise 404 page). Therefore, this should always be in the bottom of the code.
 app.use((req, res) => {

@@ -15,10 +15,33 @@
             <%= blog.body%>
           </p>
         </div>
+        <a class="delete" data-doc="<%= blog._id%>">Delete</a>
       </div>
 
       <%- include("./partials/footer.ejs") %>
 
+
+        <script>
+          const trashcan = document.querySelector('.delete');
+
+          trashcan.addEventListener('click', () => {
+            const endpoint = `/blogs/${trashcan.dataset.doc}`
+
+            // Ajax Request - allows the web page to be updated asynchronously by exchanging data with the server.
+            // fetch allows to make http requests (req to server) & processes the (res) sent by the server
+            // fetch takes two params - First a route to send the req to & options obj to specify type of request, etc.
+            fetch(endpoint, {
+              method: 'DELETE'
+            }).then((response) => {
+              // Got the redirect as a response & then we use response.json() to parse the response(data) receieved into a js obj we can use.
+              response.json().then((data) => {
+                // Finally redirecting to All blogs.
+                window.location.href = data.redirect;
+              })
+            }).catch(err => console.log(err));
+          })
+
+        </script>
   </body>
 
 </html>
