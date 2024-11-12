@@ -1,43 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-  <!-- Head -->
+<!-- Head -->
 <%- include("./partials/head.ejs") %>
-<body>
 
-  <!-- We can write dynamic code this way -->
-  <% const name='Axel Blaze' %>
+  <body>
 
-    <!-- To use partials we use include() function with relative path as params and also use " - " sign, not = as = gives a string value & - gives raw html -->
+    <!-- We can write dynamic code this way -->
+    <% const name='Axel Blaze' %>
 
-    <!-- Navbar -->
-    <%- include("./partials/nav.ejs") %>
+      <!-- To use partials we use include() function with relative path as params and also use " - " sign, not = as = gives a string value & - gives raw html -->
 
-      <div class="blogs content">
-        <h2>All blogs</h2>
+      <!-- Navbar -->
+      <%- include("./partials/nav.ejs") %>
+
+        <div class="blogs content">
+          <h2>All blogs</h2>
 
 
-        <!-- Looping through an array of data using view -->
+          <!-- Looping through an array of data using view -->
 
-        <%if (blogs.length> 0) {%>
-          <%blogs.forEach((blog)=> {%>
-            <h3 class="title">
-              <%=blog.title%>
-            </h3>
-            <p class="snippet">
-              <%=blog.snippet%>
-            </p>
-            <p class="body">
-              <%=blog.body%>
-            </p>
-            <%})%>
+          <%if (blogs.length> 0) {%>
+            <%blogs.forEach((blog)=> {%>
+              <!-- Setting up the anchor tag & mixing the href attribute with dynamic code using view. -->
+              <a class="single" href="/blogs/<%= blog._id%>">
+                <h3 class="title">
+                  <%=blog.title%>
+                </h3>
+                <p class="snippet">
+                  <%=blog.snippet%>
+                </p>
+                <p class="body">
+                  <%=blog.body%>
+                </p>
+                <%})%>
+              </a>
               <%} else { %>
                 <p>There are no blogs to display</p>
                 <%}%>
-      </div>
+        </div>
 
-      <!-- footer -->
-      <%- include("./partials/footer.ejs") %>
+        <!-- footer -->
+        <%- include("./partials/footer.ejs") %>
 
-</body>
+  </body>
 
 </html>

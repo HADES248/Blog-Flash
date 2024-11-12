@@ -144,7 +144,7 @@ app.get('./about-us', (req, res) => {
 
 
 // Blog routes - All the routes related to Blogs
-4// Outputting the document data into the view.
+// Outputting the document data into the view.
 app.get('/blogs', (req, res) => {
   // Fetching all blogs and rendering them in index.ejs
   // using .sort() method with the field createdAt(added automatically by mongoose) & -1 is newest to oldest sorting order.
@@ -163,12 +163,23 @@ app.post('/blogs', (req, res) => {
     // After saving the blog, redirected to home page to see the new blog.
     res.redirect('/blogs');
   }).catch(err => console.log(err));
-})
+});
 
 
 // Creating a Blog
 app.get('/blogs/create', (req, res) => {
   res.render('create', { title: 'New Blog' });
+})
+
+// Detailing a blog
+// Route Parameters - Basically part of the route which is a variable, can be implemented using :variable name.
+app.get('/blogs/:id', (req, res) => {
+  const id = req.params.id;
+
+  console.log(id);
+  Blog.findById(id).then((result) => {
+    res.render('details', { title: 'Details', blog: result })
+  }).catch(err => console.log(err));
 })
 
 // 404 Page

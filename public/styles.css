@@ -76,6 +76,16 @@ h3 {
 }
 
 /* index styles */
+.blogs a {
+  display: block;
+  margin: 40px 0px;
+  padding-left: 30px;
+  border-left: 6px solid cyan;
+}
+
+.blogs a:hover h3 {
+  color: cyan
+}
 
 /* details styles */
 
