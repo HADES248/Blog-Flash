@@ -2,7 +2,7 @@
 const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
-const Blog = require('./models/blog');
+const blogRoutes = require('./routes/blogRoutes');
 
 
 const app = express();
@@ -63,8 +63,6 @@ app.get('/single-blog', (req, res) => {
   }).catch(err => console.log(err));
 })
 */
-
-
 
 /*
  Middleware - it is the code that runs between the request made by the browser and the response sent by the server. 
@@ -142,54 +140,10 @@ app.get('./about-us', (req, res) => {
   res.redirect('/about');
 })
 
-
-// Blog routes - All the routes related to Blogs
-// Outputting the document data into the view.
-app.get('/blogs', (req, res) => {
-  // Fetching all blogs and rendering them in index.ejs
-  // using .sort() method with the field createdAt(added automatically by mongoose) & -1 is newest to oldest sorting order.
-  Blog.find().sort({ createdAt: -1 }).then((result) => {
-    res.render('index', { title: 'All Blogs', blogs: result })
-  }).catch(err => console.log(err));
-})
-
-// Adding a blog
-app.post('/blogs', (req, res) => {
-
-  // We can directly send the req.body since req.body & blog schema is same.
-  const blog = new Blog(req.body);
-
-  blog.save().then((result) => {
-    // After saving the blog, redirected to home page to see the new blog.
-    res.redirect('/blogs');
-  }).catch(err => console.log(err));
-});
-
-
-// Creating a Blog
-app.get('/blogs/create', (req, res) => {
-  res.render('create', { title: 'New Blog' });
-})
-
-// Detailing a blog
-// Route Parameters - Basically part of the route which is a variable, can be implemented using :variable name.
-app.get('/blogs/:id', (req, res) => {
-  const id = req.params.id;
-
-  console.log(id);
-  Blog.findById(id).then((result) => {
-    res.render('details', { title: 'Details', blog: result })
-  }).catch(err => console.log(err));
-})
-
-// Deleting a blog
-app.delete('/blogs/:id', (req, res) => {
-  const id = req.params.id;
-  Blog.findByIdAndDelete(id).then((result) => {
-    // When sending a Ajax request we cannot directly use a redirect as a res in node. So, we can send a res.json back to browser with a redirect property, then that property is sent to browser & then we will use Front-End to redirect to the next web page.
-    res.json({ redirect: '/blogs' })
-  }).catch(err => console.log(err));
-})
+// Blog Routes
+// Express will look in the file & apply all the routes to this app.
+// using Scoping - basically routes having /blogs will automatically be filtered here only & then further differentiated in blogRoutes.
+app.use('/blogs', blogRoutes);
 
 
 // 404 Page
