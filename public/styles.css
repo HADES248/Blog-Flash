@@ -2,9 +2,9 @@ body {
   max-width: 1200px;
   margin: 20px auto;
   padding: 0 20px;
-  font-family: 'Noto Serif', serif;
-  max-width: 1200px;
-  background-color: rgb(0, 30, 43);
+  font-family: 'Oswald';
+  background: linear-gradient(to right, #003973, #e5e5be);
+  color: white;
 }
 
 p,
@@ -16,7 +16,7 @@ ul {
   margin: 0;
   padding: 0;
   text-decoration: none;
-  color: white
+  color: white;
 }
 
 /* nav & footer styles */
@@ -47,12 +47,12 @@ nav h1 {
 nav p,
 nav a {
   font-weight: 300;
-  color: cyan;
+  color: white;
   transition: 0.3s all;
 }
 
 nav a:hover {
-  color: white;
+  color: #e5e5be;
 }
 
 footer {
@@ -80,11 +80,11 @@ h3 {
   display: block;
   margin: 40px 0px;
   padding-left: 30px;
-  border-left: 6px solid cyan;
+  border-left: 6px solid #e5e5be;
 }
 
 .blogs a:hover h3 {
-  color: cyan
+  color: #e5e5be;
 }
 
 /* details styles */
@@ -97,14 +97,13 @@ h3 {
   top: 0;
   right: 0;
   border-radius: 6px;
-  background-color: cyan;
+  background-color: #e5e5be;
   padding: 8px;
 }
 
 .delete:hover {
   cursor: pointer;
 }
-
 
 
 /* create styles */
@@ -115,12 +114,14 @@ h3 {
 
 .create-blog input,
 .create-blog textarea {
-  background-color: rgb(0, 30, 43);
+  background-color: #527191;
+  border: 1px solid #527191;
+  border-radius: 12px;
   color: white;
   display: block;
   width: 100%;
   margin: 10px 0;
-  padding: 8px;
+  padding: 12px;
 }
 
 .create-blog label {
@@ -135,10 +136,10 @@ textarea {
 
 .create-blog button {
   margin-top: 20px;
-  background: cyan;
+  background: #e5e5be;
   color: white;
   padding: 8px;
-  border: 2px solid cyan;
+  border: 2px solid #e5e5be;
   border-radius: 6px;
   font-size: 1.2em;
   cursor: pointer;
