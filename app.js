@@ -3,6 +3,7 @@ const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const blogRoutes = require('./routes/blogRoutes');
+const path = require('path');
 
 
 const app = express();
@@ -25,7 +26,8 @@ mongoose.connect(MongoURI).then(() => {
 app.use(morgan('dev'));
 
 // middleware & static files (Static files- images,css) Express also has middleware functions which allows the browser to access static files .
-app.use(express.static("public"));
+app.use(express.static(path.join(__dirname, 'public')));
+
 // Using express middleware .urlencoded() to parse the data of the req sent into a workable format.
 // .urlencoded() takes all the data from the request sent & passes that data in the request object.
 // extneded: true means that you can send more complex data in the request body.
