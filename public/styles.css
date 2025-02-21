@@ -2,21 +2,16 @@ body {
   max-width: 1200px;
   margin: 20px auto;
   padding: 0 20px;
-  font-family: 'Oswald';
+  font-family: 'Oswald', sans-serif;
   background: linear-gradient(to right, #003973, #e5e5be);
-  color: white;
+  color: #ffffff;
 }
 
-p,
-h1,
-h2,
-h3,
-a,
-ul {
+p, h1, h2, h3, a, ul {
   margin: 0;
   padding: 0;
   text-decoration: none;
-  color: white;
+  color: inherit;
 }
 
 /* nav & footer styles */
@@ -25,7 +20,7 @@ nav {
   justify-content: space-between;
   margin-bottom: 60px;
   padding-bottom: 10px;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #dddddd;
   text-transform: uppercase;
 }
 
@@ -36,7 +31,7 @@ nav ul {
 }
 
 nav li {
-  list-style-type: none;
+  list-style: none;
   margin-left: 20px;
 }
 
@@ -44,11 +39,10 @@ nav h1 {
   font-size: 3em;
 }
 
-nav p,
-nav a {
+nav p, nav a {
   font-weight: 300;
-  color: white;
-  transition: 0.3s all;
+  color: inherit;
+  transition: color 0.3s;
 }
 
 nav a:hover {
@@ -56,7 +50,7 @@ nav a:hover {
 }
 
 footer {
-  color: white;
+  color: inherit;
   text-align: center;
   margin: 80px auto 20px;
 }
@@ -72,13 +66,13 @@ h3 {
 
 .content {
   margin-left: 20px;
-  color: white;
+  color: inherit;
 }
 
 /* index styles */
 .blogs a {
   display: block;
-  margin: 40px 0px;
+  margin: 40px 0;
   padding-left: 30px;
   border-left: 6px solid #e5e5be;
 }
@@ -105,19 +99,17 @@ h3 {
   cursor: pointer;
 }
 
-
 /* create styles */
 .create-blog form {
   max-width: 400px;
   margin: 0 auto;
 }
 
-.create-blog input,
-.create-blog textarea {
+.create-blog input, .create-blog textarea {
   background-color: #527191;
   border: 1px solid #527191;
   border-radius: 12px;
-  color: white;
+  color: inherit;
   display: block;
   width: 100%;
   margin: 10px 0;
@@ -127,7 +119,7 @@ h3 {
 .create-blog label {
   display: block;
   margin-top: 24px;
-  color: white;
+  color: inherit;
 }
 
 textarea {
@@ -137,10 +129,27 @@ textarea {
 .create-blog button {
   margin-top: 20px;
   background: #e5e5be;
-  color: white;
+  color: #ffffff;
   padding: 8px;
   border: 2px solid #e5e5be;
   border-radius: 6px;
   font-size: 1.2em;
   cursor: pointer;
+}
+
+/* Media queries for responsive design */
+@media (max-width: 600px) {
+  .create-blog form {
+    max-width: 80%;
+    margin: 0 10px;
+  }
+
+  .create-blog input, .create-blog textarea {
+    padding: 10px;
+  }
+
+  .create-blog button {
+    padding: 6px;
+    font-size: 1em;
+  }
 }
