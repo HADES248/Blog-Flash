@@ -12,7 +12,7 @@ const app = express();
 const MongoURI = 'mongodb+srv://Shiva:ShivanshSingh@mongodb.3e7nf.mongodb.net/Node?retryWrites=true&w=majority&appName=MongoDb'
 
 // Mongoose is a 3rd party ODM (Object Document Mapping) Library, It wraps the MongoDb API & provides us an easier way to connect & communicate with the database. 
-mongoose.connect(MongoURI).then((result) => {
+mongoose.connect(MongoURI).then(() => {
   //listening for requests after the connected to db is established, not before as if there is Db content on the home page it wont be loaded.
   app.listen(3000);
   console.log('Connected to Db');
@@ -73,7 +73,7 @@ Return 404 pages (like the bottom of this code)
 
 All the code runs until the response(res) is sent back by the server, Example:-
 
-app.use((req,res, next) => {
+app.use((req, res, next) => {
  console.log("New Request Made");
  console.log("host:", req.hostname);
  console.log("path:", req.path);
@@ -81,16 +81,20 @@ app.use((req,res, next) => {
  // If we don't want to send a response back to the browser we will need to use the next() function to move to the next line of code as Express does not move on to the next line of code by itself.
  next();
 })
-
 */
 
 // View Engines - they help us inject dynamic data (like blogs - every one has different blogs) in our html page.
 // Express apps can use view engines very easily.
 // We will use EJS for this project.
 // To set up our view engine we use .set()
-app.set('view engine', 'ejs');
+// app.set('view engine', 'ejs');
 // we can also store our views in different folder but we would need to specify the location of that folder.
 // app.set('view', 'myViews');
+
+app.set('views', __dirname + '/views');
+app.set('view engine', 'ejs');
+
+
 
 
 //HOME PAGE

@@ -41,7 +41,7 @@ const blogCreatePost = (req, res) => {
 
 const blogDelete = (req, res) => {
   const id = req.params.id;
-  Blog.findByIdAndDelete(id).then((result) => {
+  Blog.findByIdAndDelete(id).then(() => {
     // When sending a Ajax request we cannot directly use a redirect as a res in node. So, we can send a res.json back to browser with a redirect property, then that property is sent to browser & then we will use Front-End to redirect to the next web page.
     res.json({ redirect: '/blogs' })
   }).catch(err => console.log(err));
